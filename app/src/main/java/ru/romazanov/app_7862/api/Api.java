@@ -7,6 +7,6 @@ import ru.romazanov.app_7862.model.PointResponse;
 
 public interface Api {
     @GET("api/test/points")
-    Call<PointResponse> getPoints(@Query("count") Integer count);
+    Call<PointResponse> getPoints(@Query("count") int count);
 }
 

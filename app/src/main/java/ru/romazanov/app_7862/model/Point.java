@@ -1,23 +1,27 @@
 package ru.romazanov.app_7862.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Point {
 
-    private Integer x;
-    private Integer y;
+    @SerializedName("x")
+    private Double x;
+    @SerializedName("y")
+    private Double y;
 
-    public void setX(Integer x) {
+    public void setX(Double x) {
         this.x = x;
     }
 
-    public void setY(Integer y) {
+    public void setY(Double y) {
         this.y = y;
     }
 
-    public Integer getX() {
+    public Double getX() {
         return x;
     }
 
-    public Integer getY() {
+    public Double getY() {
         return y;
     }
 }
