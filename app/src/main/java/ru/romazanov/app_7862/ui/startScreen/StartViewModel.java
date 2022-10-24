@@ -7,6 +7,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
+
 import javax.inject.Inject;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import retrofit2.Call;
@@ -48,6 +50,12 @@ public class StartViewModel extends ViewModel {
             public void onResponse(@NonNull Call<PointResponse> call, @NonNull Response<PointResponse> response) {
                 if (response.isSuccessful()) {
                     assert response.body() != null;
+                    response.body().getList().sort(new Comparator<Point>() {
+                        @Override
+                        public int compare(Point point, Point t1) {
+                            return point.getX().compareTo(t1.getX());
+                        }
+                    });
                     dataList.postValue(response.body().getList());
                 } else {
                     try {

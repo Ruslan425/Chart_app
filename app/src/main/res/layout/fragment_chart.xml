@@ -14,7 +14,7 @@
             android:padding="4dp"
             android:id="@+id/table"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="wrap_content"
             android:numColumns="3"
             android:stretchMode="columnWidth"
             tools:listitem="@android:layout/simple_list_item_1"

@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import java.util.ArrayList;
 import dagger.hilt.android.AndroidEntryPoint;
-import ru.romazanov.app_7862.R;
 import ru.romazanov.app_7862.databinding.FragmentChartBinding;
 import ru.romazanov.app_7862.model.Point;
 
