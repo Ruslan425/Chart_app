@@ -1,15 +1,29 @@
 package ru.romazanov.app_7862.ui.chartScreen;
 
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+
 import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import dagger.hilt.android.AndroidEntryPoint;
 import ru.romazanov.app_7862.databinding.FragmentChartBinding;
 import ru.romazanov.app_7862.model.Point;
@@ -20,6 +34,7 @@ public class ChartFragment extends Fragment {
     private ChartViewModel mViewModel;
     private FragmentChartBinding binding;
     private ArrayList<Point> points;
+    private LineChart lineChart;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -36,11 +51,23 @@ public class ChartFragment extends Fragment {
 
         binding.table.setAdapter(new ChartAdapter(getContext(), android.R.layout.simple_list_item_1, points));
 
-        if (points != null) {
-            Toast.makeText(getContext(), String.valueOf(points.size()), Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(getContext(), "Пусто", Toast.LENGTH_SHORT).show();
-        }
+        lineChart = binding.chart;
+        lineChart.setDragEnabled(true);
+        lineChart.setScaleEnabled(true);
+
+        List<Entry> newArray = points.stream().map(Point::pointToEntry).collect(Collectors.toList());
+
+
+        LineDataSet set1 = new LineDataSet(newArray, "Data");
+        set1.setFillAlpha(110);
+
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(set1);
+
+        LineData data = new LineData(dataSets);
+
+        lineChart.setData(data);
+
     }
 
 }

@@ -12,4 +12,6 @@ public class ChartViewModel extends ViewModel {
 
     @Inject
     ChartViewModel(){}
+
+
 }

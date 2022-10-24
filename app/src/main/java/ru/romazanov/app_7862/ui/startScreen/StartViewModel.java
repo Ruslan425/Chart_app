@@ -1,6 +1,5 @@
 package ru.romazanov.app_7862.ui.startScreen;
 
-import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -8,7 +7,6 @@ import androidx.lifecycle.ViewModel;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
-
 import javax.inject.Inject;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import retrofit2.Call;
@@ -65,8 +63,6 @@ public class StartViewModel extends ViewModel {
                         e.printStackTrace();
                     }
                 }
-                Log.i("Response", String.valueOf(response.code()));
-                Log.i("Response-headers", String.valueOf(response.headers()));
             }
             @Override
             public void onFailure(Call<PointResponse> call, Throwable t) {
