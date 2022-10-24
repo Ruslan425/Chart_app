@@ -2,11 +2,8 @@ package ru.romazanov.app_7862.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import com.github.mikephil.charting.data.Entry;
 import com.google.gson.annotations.SerializedName;
-
-import okhttp3.internal.cache.DiskLruCache;
 
 public class Point implements Parcelable {
 

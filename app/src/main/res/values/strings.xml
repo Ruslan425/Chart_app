@@ -2,4 +2,6 @@
     <string name="app_name">App_7862</string>
     <string name="common_go">Поехали</string>
     <string name="point_value">Введите количество точек</string>
+    <string name="char_title">График</string>
+    <string name="table_title">Таблица</string>
 </resources>

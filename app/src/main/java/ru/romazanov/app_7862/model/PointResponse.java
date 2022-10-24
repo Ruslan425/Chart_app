@@ -1,7 +1,6 @@
 package ru.romazanov.app_7862.model;
 
 import com.google.gson.annotations.SerializedName;
-
 import java.util.ArrayList;
 
 public class PointResponse {

@@ -1,7 +1,6 @@
 package ru.romazanov.app_7862.di;
 
 import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;

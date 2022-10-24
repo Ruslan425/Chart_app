@@ -2,7 +2,6 @@ package ru.romazanov.app_7862.ui.startScreen;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,6 +11,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import ru.romazanov.app_7862.utils.SingleLiveEvent;
 import ru.romazanov.app_7862.api.Api;
 import ru.romazanov.app_7862.model.Point;
 import ru.romazanov.app_7862.model.PointResponse;
@@ -26,18 +26,19 @@ public class StartViewModel extends ViewModel {
         this.api = api;
     }
 
-    private MutableLiveData<ArrayList<Point>> dataList;
-        LiveData<ArrayList<Point>> getDataList() {
-            if (dataList == null) {
-                dataList = new MutableLiveData<ArrayList<Point>>();
+    private SingleLiveEvent<ArrayList<Point>> single;
+        LiveData<ArrayList<Point>> getSingle() {
+            if(single == null) {
+                single = new SingleLiveEvent<>();
             }
-            return dataList;
-    }
+            return single;
+        };
 
-    private MutableLiveData<String> error;
+
+    private SingleLiveEvent<String> error;
         LiveData<String> error() {
             if (error == null) {
-                error = new MutableLiveData<String>();
+                error = new SingleLiveEvent<>();
             }
             return error;
         }
@@ -54,7 +55,7 @@ public class StartViewModel extends ViewModel {
                             return point.getX().compareTo(t1.getX());
                         }
                     });
-                    dataList.postValue(response.body().getList());
+                    single.postValue(response.body().getList());
                 } else {
                     try {
                         assert response.errorBody() != null;

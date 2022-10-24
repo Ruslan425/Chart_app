@@ -8,8 +8,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +18,12 @@ import ru.romazanov.app_7862.R;
 import ru.romazanov.app_7862.databinding.FragmentStartBinding;
 import ru.romazanov.app_7862.model.Point;
 
-
 @AndroidEntryPoint
 public class StartFragment extends Fragment {
 
     private StartViewModel mViewModel;
     private FragmentStartBinding binding;
+    private Boolean test = false;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -54,7 +52,7 @@ public class StartFragment extends Fragment {
             }
         });
 
-        mViewModel.getDataList().observe(getViewLifecycleOwner(),new Observer<ArrayList<Point>>() {
+        mViewModel.getSingle().observe(getViewLifecycleOwner(),new Observer<ArrayList<Point>>() {
             @Override
             public void onChanged(ArrayList<Point> points) {
                 Bundle bundle = new Bundle();

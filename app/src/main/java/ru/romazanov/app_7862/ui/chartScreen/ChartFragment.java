@@ -1,29 +1,21 @@
 package ru.romazanov.app_7862.ui.chartScreen;
 
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import dagger.hilt.android.AndroidEntryPoint;
 import ru.romazanov.app_7862.databinding.FragmentChartBinding;
 import ru.romazanov.app_7862.model.Point;
@@ -57,16 +49,16 @@ public class ChartFragment extends Fragment {
 
         List<Entry> newArray = points.stream().map(Point::pointToEntry).collect(Collectors.toList());
 
-
         LineDataSet set1 = new LineDataSet(newArray, "Data");
         set1.setFillAlpha(110);
+        set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
 
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(set1);
 
         LineData data = new LineData(dataSets);
-
         lineChart.setData(data);
+        lineChart.animateY(500);
 
     }
 
