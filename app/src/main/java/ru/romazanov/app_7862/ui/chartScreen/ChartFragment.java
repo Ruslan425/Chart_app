@@ -1,5 +1,6 @@
 package ru.romazanov.app_7862.ui.chartScreen;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,11 +9,13 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,6 +37,8 @@ public class ChartFragment extends Fragment {
         binding = FragmentChartBinding.inflate(inflater, container, false);
         points = requireArguments().getParcelableArrayList("points");
         mViewModel = new ViewModelProvider(this).get(ChartViewModel.class);
+
+
         return binding.getRoot();
     }
 
@@ -60,6 +65,17 @@ public class ChartFragment extends Fragment {
         lineChart.setData(data);
         lineChart.animateY(500);
 
+        binding.save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bitmap bitmap = lineChart.getChartBitmap();
+                try {
+                    mViewModel.saveImage(bitmap, "testImage", getContext());
+                } catch (IOException e) {
+                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
 }

@@ -1,7 +1,11 @@
 package ru.romazanov.app_7862.ui.startScreen;
 
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import android.Manifest;
+import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,13 +27,13 @@ public class StartFragment extends Fragment {
 
     private StartViewModel mViewModel;
     private FragmentStartBinding binding;
-    private Boolean test = false;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentStartBinding.inflate(inflater, container, false);
         mViewModel = new ViewModelProvider(this).get(StartViewModel.class);
+        verifyStoragePermissions(getActivity());
         return binding.getRoot();
     }
 
@@ -67,5 +71,22 @@ public class StartFragment extends Fragment {
                 Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static final String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+    };
+
+    public static void verifyStoragePermissions(Activity activity) {
+        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+            );
+
+        }
     }
 }

@@ -4,4 +4,5 @@
     <string name="point_value">Введите количество точек</string>
     <string name="char_title">График</string>
     <string name="table_title">Таблица</string>
+    <string name="save">Сохранить</string>
 </resources>
